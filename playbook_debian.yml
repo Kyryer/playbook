@@ -1,12 +1,15 @@
 ---
-- name: Ensure mounting of unneeded filesystems is disabled
+- name: Playbook for customize Debian9 by CIS
   hosts: all
   become: yes
 
-  vars:
-  	source_file: ./unneededfilesystem.conf
-    destin_file: /etc/modprobe.d
   tasks: 
 
-  - name: Copy files
-    copy: src= {{ source_file }} dest={{ destin_file }} mode=777
+  - name: Copy config file for unneeded filesystems
+    copy: 
+      src: ./unneededfilesystem.conf
+      dest: /etc/modprobe.d/ 
+      mode: 777
+
+  - name: Ensure mounting of unneeded filesystems
+    command: rmmod unneededfilesystem
