@@ -1,0 +1,12 @@
+---
+- name: Ensure mounting of unneeded filesystems is disabled
+  hosts: all
+  become: yes
+
+  vars:
+  	source_file: ./unneededfilesystem.conf
+    destin_file: /etc/modprobe.d
+  tasks: 
+
+  - name: Copy files
+    copy: src= {{ source_file }} dest={{ destin_file }} mode=777
