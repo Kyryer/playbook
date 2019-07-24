@@ -13,3 +13,28 @@
 
   - name: Ensure mounting of unneeded filesystems
     command: rmmod unneededfilesystem
+
+  - name: Remove freevxfs module
+    modprobe: 
+      name: freevxfs
+      state: absent
+
+  - name: Remove jffs2 module
+    modprobe: 
+      name: jffs2
+      state: absent
+
+  - name: Remove hfs module
+    modprobe: 
+      name: hfs
+      state: absent
+
+  - name: Remove hfsplus module
+    modprobe: 
+      name: hfsplus
+      state: absent
+      
+  - name: Remove udf module  
+    modprobe: 
+      name: udf
+      state: absent    
