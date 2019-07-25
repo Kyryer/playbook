@@ -38,3 +38,24 @@
     modprobe: 
       name: udf
       state: absent    
+  
+  - name: Ensure /tmp is configurated
+    shell: mount | grep /tmp
+
+  - name: Ensure separate partition exist for /var/tmp
+    shell: mount | grep /var/tmp 
+  
+  - name: nodev option for /home
+    lineinfile:
+      dest: /etc/fstab
+      regexp: '/home'
+      insertbefore: 'defaults'
+      line: '/dev/mapper/debian--vg-home /home ext4 nodev 0 2'
+
+  - name: nodev,nosuid,noexec option for /tmp
+    lineinfile:
+      dest: /etc/fstab
+      regexp: '/tmp'
+      insertbefore: 'defaults'
+      line: '/dev/mapper/debian--vg-tmp /tmp ext4 nodev,nosuid,noexec 0 2'
+
