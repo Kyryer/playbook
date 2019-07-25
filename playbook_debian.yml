@@ -82,6 +82,13 @@
       insertbefore: 'defaults'
       line: '/dev/mapper/debian--vg-dev/shm /dev/shm ext4 nodev,nosuid,noexec 0 2'
 
+  - name: sticky bit for /var (1.1.21)
+    shell: chmod -R +t /var
 
+  - name: sticky bit for /home (1.1.21)
+    shell: chmod -R +t /home
+
+  - name: sticky bit for /tmp (1.1.21)
+    shell: chmod -R +t /tmp
 
 
