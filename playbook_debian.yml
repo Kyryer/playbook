@@ -75,5 +75,13 @@
       insertbefore: 'defaults'
       line: '/dev/mapper/debian--vg-home /home ext4 nodev 0 2'
 
+  - name: nodev,nosuid,noexec option for /dev/shm (1.1.15-1.1.17)
+    lineinfile:
+      dest: /etc/fstab
+      regexp: '/dev/shm'
+      insertbefore: 'defaults'
+      line: '/dev/mapper/debian--vg-dev/shm /dev/shm ext4 nodev,nosuid,noexec 0 2'
+
+
 
 
