@@ -43,7 +43,14 @@
     shell: mount | grep /tmp
 
   - name: Ensure separate partition exist for /var/tmp
-    shell: mount | grep /var/tmp 
+    shell: mount | grep /var/tmp  
+      
+  - name: nodev,nosuid,noexec option for /var/tmp
+    lineinfile:
+      dest: /etc/fstab
+      regexp: '/var/tmp'
+      insertbefore: 'defaults'
+      line: '/dev/mapper/debian--vg-var/tmp /var/tmp ext4 nodev,nosuid,noexec 0 2'  
   
   - name: nodev option for /home
     lineinfile:
