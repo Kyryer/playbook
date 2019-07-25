@@ -5,64 +5,72 @@
 
   tasks: 
 
-  - name: Copy config file for unneeded filesystems
+  - name: Copy config file for unneeded filesystems (1.1.1.1-1.1.1.5)
     copy: 
       src: ./unneededfilesystem.conf
       dest: /etc/modprobe.d/ 
       mode: 777
 
-  - name: Ensure mounting of unneeded filesystems
+  - name: Ensure mounting of unneeded filesystems (1.1.1.1-1.1.1.5)
     command: rmmod unneededfilesystem
 
-  - name: Remove freevxfs module
+  - name: Remove freevxfs module (1.1.1.1)
     modprobe: 
       name: freevxfs
       state: absent
 
-  - name: Remove jffs2 module
+  - name: Remove jffs2 module (1.1.1.2)
     modprobe: 
       name: jffs2
       state: absent
 
-  - name: Remove hfs module
+  - name: Remove hfs module (1.1.1.3)
     modprobe: 
       name: hfs
       state: absent
 
-  - name: Remove hfsplus module
+  - name: Remove hfsplus module (1.1.1.4)
     modprobe: 
       name: hfsplus
       state: absent
       
-  - name: Remove udf module  
+  - name: Remove udf module (1.1.1.5)
     modprobe: 
       name: udf
       state: absent    
   
-  - name: Ensure /tmp is configurated
+  - name: Ensure /tmp is configurated (1.1.2, 1.1.6)
     shell: mount | grep /tmp
 
-  - name: Ensure separate partition exist for /var/tmp
+  - name: nodev,nosuid,noexec option for /tmp (1.1.3-1.1.5)
+    lineinfile:
+      dest: /etc/fstab
+      regexp: '/tmp'
+      insertbefore: 'defaults'
+      line: '/dev/mapper/debian--vg-tmp /tmp ext4 nodev,nosuid,noexec 0 2'
+
+  - name: Ensure separate partition exist for /var/tmp (1.1.7)
     shell: mount | grep /var/tmp  
       
-  - name: nodev,nosuid,noexec option for /var/tmp
+  - name: nodev,nosuid,noexec option for /var/tmp (1.1.8-1.1.10)
     lineinfile:
       dest: /etc/fstab
       regexp: '/var/tmp'
       insertbefore: 'defaults'
       line: '/dev/mapper/debian--vg-var/tmp /var/tmp ext4 nodev,nosuid,noexec 0 2'  
-  
-  - name: nodev option for /home
+ 
+  - name: Ensure separate partition exist for /var/log (1.1.11)
+    shell: mount | grep /var/log 
+
+  - name: Ensure separate partition exist for /var/log/audit (1.1.12)
+    shell: mount | grep /var/log/audit   
+
+  - name: nodev option for /home (1.1.14)
     lineinfile:
       dest: /etc/fstab
       regexp: '/home'
       insertbefore: 'defaults'
       line: '/dev/mapper/debian--vg-home /home ext4 nodev 0 2'
 
-  - name: nodev,nosuid,noexec option for /tmp
-    lineinfile:
-      dest: /etc/fstab
-      regexp: '/tmp'
-      insertbefore: 'defaults'
-      line: '/dev/mapper/debian--vg-tmp /tmp ext4 nodev,nosuid,noexec 0 2'
+
 
