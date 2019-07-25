@@ -63,7 +63,10 @@
     shell: mount | grep /var/log 
 
   - name: Ensure separate partition exist for /var/log/audit (1.1.12)
-    shell: mount | grep /var/log/audit   
+    shell: mount | grep /var/log/audit  
+
+  - name: Ensure separate partition exist for /home (1.1.13)
+    shell: mount | grep /home      
 
   - name: nodev option for /home (1.1.14)
     lineinfile:
