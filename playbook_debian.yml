@@ -91,4 +91,10 @@
   - name: sticky bit for /tmp (1.1.21)
     shell: chmod -R +t /tmp
 
+  - name: noauto option for cd/dvd (1.1.22)
+    lineinfile:
+      dest: /etc/fstab
+      regexp: '/cdrom0'
+      insertbefore: 'defaults'
+      line: '/dev/sr0 /media/cdrom0 udf,iso9660 user,noauto 0 0'
 
