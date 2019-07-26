@@ -220,3 +220,15 @@
   
   - name: disabled avahi-daemon (2.2.3)     
     shell: systemctl disable avahi-daemon                      
+
+  - name: disabled cups (2.2.4)     
+    shell: systemctl disable cups
+
+  - name: disabled DHCP (2.2.5)     
+    shell: systemctl disable isc-dhcp-server
+
+  - name: disabled DHCP (v6) (2.2.5)     
+    shell: systemctl disable isc-dhcp-server6        
+
+  - name: disabled ldap (2.2.6)     
+    shell: systemctl disable slapd    
