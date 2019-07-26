@@ -206,4 +206,17 @@
     apt:
       name: xinetd
       state: absent 
-      purge: yes                     
+      purge: yes
+
+  - name: remove xinetd (2.1.2)
+    apt:
+      name: openbsd-inetd
+      state: absent
+
+  - name: remove xserver-xorg* (2.2.2)
+    apt:
+      name: xserver-xorg*
+      state: absent  
+  
+  - name: disabled avahi-daemon (2.2.3)     
+    shell: systemctl disable avahi-daemon                      
