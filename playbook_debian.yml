@@ -114,3 +114,9 @@
 
   - name: confin premitions bootloader prt.2 (1.4.1)
     shell: chmod og-rwx /boot/grub/grub.cfg     
+
+  - name: checking bootloader password (1.4.2)
+    shell: passwd -S  
+
+  - name: checking root password (1.4.3)
+    shell: passwd root     
