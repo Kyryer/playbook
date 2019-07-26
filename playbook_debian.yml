@@ -200,4 +200,10 @@
       dest: /etc/gdm3/greeter.dconf-defaults
       regexp: ''
       insertbefore: EOF
-      line: 'Authorized uses only. All activity may be monitored and reported.'                      
+      line: 'Authorized uses only. All activity may be monitored and reported.'
+
+  - name: remove xinetd (2.1.1)
+    apt:
+      name: xinetd
+      state: absent 
+      purge: yes                     
