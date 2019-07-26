@@ -186,4 +186,18 @@
     shell: chown root:root /etc/issue.net
 
   - name: change premissions for /etc/issue.net (1.7.1.6)
-    shell: chmod 644 /etc/issue.net             
+    shell: chmod 644 /etc/issue.net
+
+  - name: edit greeter.dconf-defaults (1.7.2)
+    lineinfile:
+      dest: /etc/gdm3/greeter.dconf-defaults
+      regexp: 'banner-message'
+      insertbefore: BOF
+      line: 'banner-message-enable=true'
+
+  - name: edit greeter.dconf-defaults prt.2 (1.7.2)
+    lineinfile:
+      dest: /etc/gdm3/greeter.dconf-defaults
+      regexp: ''
+      insertbefore: EOF
+      line: 'Authorized uses only. All activity may be monitored and reported.'                      
