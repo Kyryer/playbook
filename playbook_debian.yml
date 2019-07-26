@@ -98,16 +98,16 @@
       insertbefore: 'defaults'
       line: '/dev/sr0 /media/cdrom0 udf,iso9660 user,noauto 0 0'
 
-  - name: install aide (1.3.1)
-    apt: 
-      name: aide
+ # - name: install aide (1.3.1)
+ #   apt: 
+ #     name: aide
 
-  - name: create regulary checking filesystem job (1.3.2)
-    cron:
-      name: 'regulary checking filesystem'
-      minute: '0'
-      hour: '5'
-      job: /usr/bin/aide.wrapper 
+ # - name: create regulary checking filesystem job (1.3.2)
+ #   cron:
+ #     name: 'regulary checking filesystem'
+ #     minute: '0'
+ #     hour: '5'
+ #     job: /usr/bin/aide.wrapper 
 
   - name: confin premitions bootloader prt.1 (1.4.1)
     shell: chown root:root /boot/grub/grub.cfg # chmod og-rwx /boot/grub/grub.cfg     
