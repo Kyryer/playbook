@@ -120,3 +120,33 @@
 
   - name: checking root password (1.4.3)
     shell: passwd root     
+
+  - name: added line in limits.conf (1.5.1)
+      lineinfile: dest: '/etc/security/limits.conf'
+      regexp: ''
+      insertbefore: EOF
+      line: '* hard core 0'
+
+  - name: set parameter in sysctl.conf (1.5.1)
+      lineinfile: dest: '/etc/sysctl.conf'
+      regexp: ''
+      insertbefore: EOF
+      line: 'fs.suid_dumpable = 0'     
+
+  - name: run command to the activate kernel parameter (1.5.1)
+    shell: sysctl -w fs.suid_dumpable=0
+
+  - name: set parameter in sysctl.conf (1.5.2)
+      lineinfile: dest: '/etc/sysctl.conf'
+      regexp: ''
+      insertbefore: EOF
+      line: 'kernel.randomize_va_space = 2'     
+
+  - name: run command to the activate kernel parameter (1.5.2)
+    shell: sysctl -w kernel.randomize_va_space=2
+
+  - name: restore binaries (1.5.4)
+    shell: prelink -ua
+
+  - name: remove prelink (1.5.4)
+    shell: apt-get remove prelink  
