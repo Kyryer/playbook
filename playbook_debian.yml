@@ -231,4 +231,34 @@
     shell: systemctl disable isc-dhcp-server6        
 
   - name: disabled ldap (2.2.6)     
-    shell: systemctl disable slapd    
+    shell: systemctl disable slapd  
+
+  - name: disabled nfs (2.2.7)     
+    shell: systemctl disable nfs-server
+
+  - name: disabled rpc (2.2.7)     
+    shell: systemctl disable rpcbind
+
+  - name: disabled dns server (2.2.8)     
+    shell: systemctl disable bind9
+
+  - name: disabled ftp server (2.2.9)     
+    shell: systemctl disable vsftpd
+
+  - name: disabled http server (2.2.10)     
+    shell: systemctl disable apache2
+
+  - name: remove exim4 (2.2.11)
+    apt:
+      name: exim4
+      state: absent
+      purge: yes
+
+  - name: disabled samba (2.2.12)     
+    shell: systemctl disable smbd
+
+  - name: disabled http proxy server (2.2.13)     
+    shell: systemctl disable squid
+
+  - name: disabled snmp server (2.2.14)     
+    shell: systemctl disable snmpd                                      
