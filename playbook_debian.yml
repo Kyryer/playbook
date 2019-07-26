@@ -110,7 +110,7 @@
  #     job: /usr/bin/aide.wrapper 
 
   - name: confin premitions bootloader prt.1 (1.4.1)
-    shell: chown root:root /boot/grub/grub.cfg # chmod og-rwx /boot/grub/grub.cfg     
+    shell: chown root:root /boot/grub/grub.cfg   
 
   - name: confin premitions bootloader prt.2 (1.4.1)
     shell: chmod og-rwx /boot/grub/grub.cfg     
