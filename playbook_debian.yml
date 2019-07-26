@@ -267,4 +267,29 @@
     shell: systemctl disable rsync 
 
   - name: disabled NIS (2.2.17)     
-    shell: systemctl disable nis                                              
+    shell: systemctl disable nis  
+
+  - name: remove NIS client (2.3.1)
+    apt:
+      name: ypbind
+      state: absent 
+
+  - name: remove rsh client (2.3.2)
+    apt:
+      name: rsh
+      state: absent 
+
+  - name: remove talk client (2.3.3)
+    apt:
+      name: talk
+      state: absent   
+
+  - name: remove telnet client (2.3.4)
+    apt:
+      name: telnet
+      state: absent
+
+  - name: remove ldap client (2.3.5)
+    apt:
+      name: openldap-clients
+      state: absent                                                                
