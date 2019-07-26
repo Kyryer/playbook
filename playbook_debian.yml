@@ -149,4 +149,41 @@
     shell: prelink -ua
 
   - name: remove prelink (1.5.4)
-    shell: apt-get remove prelink  
+    apt:
+      name: prelink
+      state: absent
+
+  - name: checking /etc/motd file (1.7.1.1)
+    shell: cat /etc/motd
+
+  - name: configuration local login banner (1.7.1.2)
+    lineinfile:
+      dest: /etc/issue
+      regexp: '*Debian*'
+      insertbefore: BOF
+      line: 'Authorized uses only. All activity may be monitored and reported.'
+
+  - name: configuration remote login banner (1.7.1.3)
+    lineinfile:
+      dest: /etc/issue.net
+      regexp: '*Debian*'
+      insertbefore: BOF
+      line: 'Authorized uses only. All activity may be monitored and reported.'
+
+  - name: change ownership for /etc/motd (1.7.1.4)
+    shell: chown root:root /etc/motd
+
+  - name: change premissions for /etc/motd (1.7.1.4)
+    shell: chmod 644 /etc/motd
+
+  - name: change ownership for /etc/issue (1.7.1.5)
+    shell: chown root:root /etc/issue
+
+  - name: change premissions for /etc/issue (1.7.1.5)
+    shell: chmod 644 /etc/issue
+
+  - name: change ownership for /etc/issue.net (1.7.1.6)
+    shell: chown root:root /etc/issue.net
+
+  - name: change premissions for /etc/issue.net (1.7.1.6)
+    shell: chmod 644 /etc/issue.net             
