@@ -292,4 +292,33 @@
   - name: remove ldap client (2.3.5)
     apt:
       name: openldap-clients
-      state: absent                                                                
+      state: absent
+
+  - name: disabling ip forwarding (3.1.1)
+    sysctl:
+      name: net.ipv4.ip_forward
+      value: 0
+      state: present
+      reload: true
+      ignoreerrors: true
+
+  - name: set parameter in sysctl.conf (3.1.2)
+    lineinfile: dest: '/etc/sysctl.conf'
+      regexp: ''
+      insertbefore: EOF
+      line: 'net.ipv4.conf.all.send_redirects = 0'  
+
+  - name: set parameter in sysctl.conf (prt.2) (3.1.2)
+    lineinfile: dest: '/etc/sysctl.conf'
+      regexp: ''
+      insertbefore: EOF
+      line: 'net.ipv4.conf.default.send_redirects = 0'        
+
+  - name: set the active kernel parameter (prt.1) (3.1.2)
+    shell: sysctl -w net.ipv4.conf.all.send_redirects=0
+
+  - name: set the active kernel parameter (prt.2) (3.1.2)
+    shell: sysctl -w net.ipv4.conf.default.send_redirects=0 
+
+  - name: set the active kernel parameter (prt.2) (3.1.2)
+    shell: sysctl -w net.ipv4.route.flush=1       
