@@ -577,4 +577,24 @@
       name: tcpd
       state: present
     tags: 
-      - section_3  
+      - section_3 
+
+  - name: change ownership for /etc/hosts.allow (3.3.4)
+    shell: chown root:root /etc/hosts.allow
+    tags: 
+      - section_3
+
+  - name: change premissions for /etc/hosts.allow (3.3.4)
+    shell: chmod 644 /etc/hosts.allow
+    tags: 
+      - section_3     
+
+  - name: change ownership for /etc/hosts.deny (3.3.5)
+    shell: chown root:root /etc/hosts.deny
+    tags: 
+      - section_3
+
+  - name: change premissions for /etc/hosts.deny (3.3.5)
+    shell: chmod 644 /etc/hosts.deny
+    tags: 
+      - section_3        
