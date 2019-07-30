@@ -500,7 +500,7 @@
     tags: 
       - section_3   
 
-  - name: disable secure ICMP redirects (3.2.2)
+  - name: disable secure ICMP redirects (3.2.3)
     sysctl:
       name: '{{ item.name }}'
       value: '{{ item.value }}'
@@ -514,7 +514,7 @@
     tags: 
       - section_3              
 
-  - name: enable suspicious packets are logged (3.3.3)
+  - name: enable suspicious packets are logged (3.2.4)
     sysctl:
       name: '{{ item.name }}'
       value: '{{ item.value }}'
