@@ -10,37 +10,53 @@
       src: ./unneededfilesystem.conf
       dest: /etc/modprobe.d/ 
       mode: 777
+    tags: 
+      - section_1  
 
   - name: Ensure mounting of unneeded filesystems (1.1.1.1-1.1.1.5)
     command: rmmod unneededfilesystem
+    tags: 
+      - section_1
 
   - name: Remove freevxfs module (1.1.1.1)
     modprobe: 
       name: freevxfs
       state: absent
+    tags: 
+      - section_1  
 
   - name: Remove jffs2 module (1.1.1.2)
     modprobe: 
       name: jffs2
       state: absent
+    tags: 
+      - section_1  
 
   - name: Remove hfs module (1.1.1.3)
     modprobe: 
       name: hfs
       state: absent
+    tags: 
+      - section_1  
 
   - name: Remove hfsplus module (1.1.1.4)
     modprobe: 
       name: hfsplus
       state: absent
+    tags: 
+      - section_1  
       
   - name: Remove udf module (1.1.1.5)
     modprobe: 
       name: udf
       state: absent    
+    tags: 
+      - section_1  
   
   - name: Ensure /tmp is configurated (1.1.2, 1.1.6)
     shell: mount | grep /tmp
+    tags: 
+      - section_1
 
   - name: nodev,nosuid,noexec option for /tmp (1.1.3-1.1.5)
     lineinfile:
@@ -48,9 +64,13 @@
       regexp: '/tmp'
       insertbefore: 'defaults'
       line: '/dev/mapper/debian--vg-tmp /tmp ext4 nodev,nosuid,noexec 0 2'
+    tags: 
+      - section_1  
 
   - name: Ensure separate partition exist for /var/tmp (1.1.7)
     shell: mount | grep /var/tmp  
+    tags: 
+      - section_1
       
   - name: nodev,nosuid,noexec option for /var/tmp (1.1.8-1.1.10)
     lineinfile:
@@ -58,15 +78,23 @@
       regexp: '/var/tmp'
       insertbefore: 'defaults'
       line: '/dev/mapper/debian--vg-var/tmp /var/tmp ext4 nodev,nosuid,noexec 0 2'  
+    tags: 
+      - section_1  
  
   - name: Ensure separate partition exist for /var/log (1.1.11)
     shell: mount | grep /var/log 
+    tags: 
+      - section_1
 
   - name: Ensure separate partition exist for /var/log/audit (1.1.12)
     shell: mount | grep /var/log/audit  
+    tags: 
+      - section_1
 
   - name: Ensure separate partition exist for /home (1.1.13)
-    shell: mount | grep /home      
+    shell: mount | grep /home 
+    tags: 
+      - section_1     
 
   - name: nodev option for /home (1.1.14)
     lineinfile:
@@ -74,6 +102,8 @@
       regexp: '/home'
       insertbefore: 'defaults'
       line: '/dev/mapper/debian--vg-home /home ext4 nodev 0 2'
+    tags: 
+      - section_1  
 
   - name: nodev,nosuid,noexec option for /dev/shm (1.1.15-1.1.17)
     lineinfile:
@@ -81,15 +111,23 @@
       regexp: '/dev/shm'
       insertbefore: 'defaults'
       line: '/dev/mapper/debian--vg-dev/shm /dev/shm ext4 nodev,nosuid,noexec 0 2'
+    tags: 
+      - section_1  
 
   - name: sticky bit for /var (1.1.21)
     shell: chmod -R +t /var
+    tags: 
+      - section_1
 
   - name: sticky bit for /home (1.1.21)
     shell: chmod -R +t /home
+    tags: 
+      - section_1
 
   - name: sticky bit for /tmp (1.1.21)
     shell: chmod -R +t /tmp
+    tags: 
+      - section_1
 
   - name: noauto option for cd/dvd (1.1.22)
     lineinfile:
@@ -97,6 +135,8 @@
       regexp: '/cdrom0'
       insertbefore: 'defaults'
       line: '/dev/sr0 /media/cdrom0 udf,iso9660 user,noauto 0 0'
+    tags: 
+      - section_1
 
  # - name: install aide (1.3.1)
  #   apt: 
@@ -110,51 +150,78 @@
  #     job: /usr/bin/aide.wrapper 
 
   - name: confin premitions bootloader prt.1 (1.4.1)
-    shell: chown root:root /boot/grub/grub.cfg   
+    shell: chown root:root /boot/grub/grub.cfg 
+    tags: 
+      - section_1  
 
   - name: confin premitions bootloader prt.2 (1.4.1)
-    shell: chmod og-rwx /boot/grub/grub.cfg     
+    shell: chmod og-rwx /boot/grub/grub.cfg 
+    tags: 
+      - section_1    
 
   - name: checking bootloader password (1.4.2)
-    shell: passwd -S  
+    shell: passwd -S 
+    tags: 
+      - section_1 
 
   - name: checking root password (1.4.3)
-    shell: passwd root     
+    shell: passwd root   
+    tags: 
+      - section_1  
 
   - name: added line in limits.conf (1.5.1)
-      lineinfile: dest: '/etc/security/limits.conf'
+    lineinfile: 
+      dest: '/etc/security/limits.conf'
       regexp: ''
       insertbefore: EOF
       line: '* hard core 0'
+    tags: 
+      - section_1  
 
   - name: set parameter in sysctl.conf (1.5.1)
-      lineinfile: dest: '/etc/sysctl.conf'
+    lineinfile: 
+      dest: '/etc/sysctl.conf'
       regexp: ''
       insertbefore: EOF
-      line: 'fs.suid_dumpable = 0'     
+      line: 'fs.suid_dumpable = 0'  
+      tags: 
+      - section_1   
 
   - name: run command to the activate kernel parameter (1.5.1)
     shell: sysctl -w fs.suid_dumpable=0
+    tags: 
+      - section_1
 
   - name: set parameter in sysctl.conf (1.5.2)
-      lineinfile: dest: '/etc/sysctl.conf'
+    lineinfile: 
+      dest: '/etc/sysctl.conf'
       regexp: ''
       insertbefore: EOF
-      line: 'kernel.randomize_va_space = 2'     
+      line: 'kernel.randomize_va_space = 2' 
+    tags: 
+      - section_1      
 
   - name: run command to the activate kernel parameter (1.5.2)
     shell: sysctl -w kernel.randomize_va_space=2
+    tags: 
+      - section_1
 
   - name: restore binaries (1.5.4)
     shell: prelink -ua
+    tags: 
+      - section_1
 
   - name: remove prelink (1.5.4)
     apt:
       name: prelink
       state: absent
+    tags: 
+      - section_1  
 
   - name: checking /etc/motd file (1.7.1.1)
     shell: cat /etc/motd
+    tags: 
+      - section_1
 
   - name: configuration local login banner (1.7.1.2)
     lineinfile:
@@ -162,6 +229,8 @@
       regexp: '*Debian*'
       insertbefore: BOF
       line: 'Authorized uses only. All activity may be monitored and reported.'
+    tags: 
+      - section_1  
 
   - name: configuration remote login banner (1.7.1.3)
     lineinfile:
@@ -169,24 +238,38 @@
       regexp: '*Debian*'
       insertbefore: BOF
       line: 'Authorized uses only. All activity may be monitored and reported.'
+    tags: 
+      - section_1  
 
   - name: change ownership for /etc/motd (1.7.1.4)
     shell: chown root:root /etc/motd
+    tags: 
+      - section_1
 
   - name: change premissions for /etc/motd (1.7.1.4)
     shell: chmod 644 /etc/motd
+    tags: 
+      - section_1
 
   - name: change ownership for /etc/issue (1.7.1.5)
     shell: chown root:root /etc/issue
+    tags: 
+      - section_1
 
   - name: change premissions for /etc/issue (1.7.1.5)
     shell: chmod 644 /etc/issue
+    tags: 
+      - section_1
 
   - name: change ownership for /etc/issue.net (1.7.1.6)
     shell: chown root:root /etc/issue.net
+    tags: 
+      - section_1
 
   - name: change premissions for /etc/issue.net (1.7.1.6)
     shell: chmod 644 /etc/issue.net
+    tags: 
+      - section_1
 
   - name: edit greeter.dconf-defaults (1.7.2)
     lineinfile:
@@ -194,6 +277,8 @@
       regexp: 'banner-message'
       insertbefore: BOF
       line: 'banner-message-enable=true'
+    tags: 
+      - section_1  
 
   - name: edit greeter.dconf-defaults prt.2 (1.7.2)
     lineinfile:
