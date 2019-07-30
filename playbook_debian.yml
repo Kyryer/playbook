@@ -301,29 +301,41 @@
       state: present
       reload: true
       ignoreerrors: true
+    tags: 
+      - section_3  
 
   - name: set parameter in sysctl.conf (3.1.2)
     lineinfile: 
       dest: '/etc/sysctl.conf'
       regexp: ''
       insertbefore: EOF
-      line: 'net.ipv4.conf.all.send_redirects = 0'  
+      line: 'net.ipv4.conf.all.send_redirects = 0'
+    tags: 
+      - section_3    
 
   - name: set parameter in sysctl.conf (prt.2) (3.1.2)
     lineinfile: 
       dest: '/etc/sysctl.conf'
       regexp: ''
       insertbefore: EOF
-      line: 'net.ipv4.conf.default.send_redirects = 0'        
+      line: 'net.ipv4.conf.default.send_redirects = 0'
+    tags: 
+      - section_3          
 
   - name: set the active kernel parameter (prt.1) (3.1.2)
     shell: sysctl -w net.ipv4.conf.all.send_redirects=0
+    tags: 
+      - section_3
 
   - name: set the active kernel parameter (prt.2) (3.1.2)
-    shell: sysctl -w net.ipv4.conf.default.send_redirects=0 
+    shell: sysctl -w net.ipv4.conf.default.send_redirects=0
+    tags: 
+      - section_3 
 
   - name: set the active kernel parameter (prt.2) (3.1.2)
-    shell: sysctl -w net.ipv4.route.flush=1   
+    shell: sysctl -w net.ipv4.route.flush=1 
+    tags: 
+      - section_3  
     
   - name: disable the system from accepting source routed packets (3.2.1)
     sysctl:
@@ -335,7 +347,9 @@
       ignoreerrors: true
     with_items:
       - { name: net.ipv4.conf.all.accept_source_route, value: 0 }
-      - { name: net.ipv4.conf.default.accept_source_route, value: 0 }  
+      - { name: net.ipv4.conf.default.accept_source_route, value: 0 }
+    tags: 
+      - section_3    
 
   - name: disable ICMP redirects (3.2.2)
     sysctl:
@@ -347,7 +361,9 @@
       ignoreerrors: true
     with_items:
       - { name: net.ipv4.conf.all.accept_redirects, value: 0 }
-      - { name: net.ipv4.conf.default.accept_redirects, value: 0 } 
+      - { name: net.ipv4.conf.default.accept_redirects, value: 0 }
+    tags: 
+      - section_3   
 
   - name: disable secure ICMP redirects (3.2.2)
     sysctl:
@@ -359,4 +375,20 @@
       ignoreerrors: true
     with_items:
       - { name: net.ipv4.conf.all.secure_redirects, value: 0 }
-      - { name: net.ipv4.conf.default.secure_redirects, value: 0 }       
+      - { name: net.ipv4.conf.default.secure_redirects, value: 0 }
+    tags: 
+      - section_3              
+
+  - name: enable suspicious packets are logged (3.3.3)
+    sysctl:
+      name: '{{ item.name }}'
+      value: '{{ item.value }}'
+      sysctl_set: true
+      state: present
+      reload: true
+      ignoreerrors: true
+    with_items:
+      - { name: net.ipv4.conf.all.log_martians, value: 1 }
+      - { name: net.ipv4.conf.default.log_martians, value: 1 } 
+    tags: 
+      - section_3            
