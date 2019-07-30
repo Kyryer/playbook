@@ -534,6 +534,47 @@
       value: 1
       state: present
       reload: true
-    ignoreerrors: true   
+      ignoreerrors: true   
     tags:
       - section_3 
+
+  - name: ignore ICMP responses (3.2.6)
+    sysctl:
+      name: net.ipv4.icmp_ignore_bogus_error_responses
+      value: 1
+      state: present
+      reload: true
+      ignoreerrors: true   
+    tags:
+      - section_3    
+
+  - name: enable reverse path filtering (3.2.7)
+    sysctl:
+      name: '{{ item.name }}'
+      value: '{{ item.value }}'
+      sysctl_set: true
+      state: present
+      reload: true
+      ignoreerrors: true
+    with_items:
+      - { name: net.ipv4.conf.all.rp_filter, value: 1 }
+      - { name: net.ipv4.conf.default.rp_filter, value: 1 }
+    tags:
+      - section_3
+      
+  - name: enable tcp syn cookies (3.2.8)
+    sysctl:
+      name: net.ipv4.tcp_syncookies
+      value: 1
+      state: present
+      reload: true
+      ignoreerrors: true  
+    tags:
+      - section_3      
+
+  - name: install TCP wrappers (3.3.1)
+    apt:
+      name: tcpd
+      state: present
+    tags: 
+      - section_3  
