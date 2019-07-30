@@ -627,4 +627,9 @@
   - name: loopback traffic configuration (prt.3) (3.5.1.2) 
     shell: iptables -A INPUT -s 127.0.0.0/8 -j DROP
     tags:
-      - section_3                           
+      - section_3
+
+  - name: configuration exist for all open ports (3.5.1.4) 
+    shell: iptables -A INPUT -p <protocol> --dport <port> -m state --state NEW -j ACCEPT
+    tags:
+      - section_3                               
