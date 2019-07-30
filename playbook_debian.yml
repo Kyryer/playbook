@@ -527,3 +527,13 @@
       - { name: net.ipv4.conf.default.log_martians, value: 1 } 
     tags: 
       - section_3            
+
+  - name: disable broadcast ICMP requests (3.2.5)
+    sysctl:
+      name: net.ipv4.icmp_echo_ignore_broadcasts
+      value: 1
+      state: present
+      reload: true
+    ignoreerrors: true   
+    tags:
+      - section_3 
