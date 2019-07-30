@@ -347,4 +347,16 @@
       ignoreerrors: true
     with_items:
       - { name: net.ipv4.conf.all.accept_redirects, value: 0 }
-      - { name: net.ipv4.conf.default.accept_redirects, value: 0 }    
+      - { name: net.ipv4.conf.default.accept_redirects, value: 0 } 
+
+  - name: disable secure ICMP redirects (3.2.2)
+    sysctl:
+      name: '{{ item.name }}'
+      value: '{{ item.value }}'
+      sysctl_set: true
+      state: present
+      reload: true
+      ignoreerrors: true
+    with_items:
+      - { name: net.ipv4.conf.all.secure_redirects, value: 0 }
+      - { name: net.ipv4.conf.default.secure_redirects, value: 0 }       
