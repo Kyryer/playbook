@@ -201,98 +201,148 @@
       regexp: ''
       insertbefore: EOF
       line: 'Authorized uses only. All activity may be monitored and reported.'
+    tags: 
+      - section_1  
 
   - name: remove xinetd (2.1.1)
     apt:
       name: xinetd
       state: absent 
       purge: yes
+    tags: 
+      - section_2  
 
   - name: remove xinetd (2.1.2)
     apt:
       name: openbsd-inetd
       state: absent
+    tags: 
+      - section_2  
 
   - name: remove xserver-xorg* (2.2.2)
     apt:
       name: xserver-xorg*
-      state: absent  
+      state: absent
+    tags: 
+      - section_2    
   
   - name: disabled avahi-daemon (2.2.3)     
-    shell: systemctl disable avahi-daemon                      
+    shell: systemctl disable avahi-daemon
+    tags: 
+      - section_2                      
 
   - name: disabled cups (2.2.4)     
     shell: systemctl disable cups
+    tags: 
+      - section_2
 
   - name: disabled DHCP (2.2.5)     
     shell: systemctl disable isc-dhcp-server
+    tags: 
+      - section_2
 
   - name: disabled DHCP (v6) (2.2.5)     
-    shell: systemctl disable isc-dhcp-server6        
+    shell: systemctl disable isc-dhcp-server6
+    tags: 
+      - section_2        
 
   - name: disabled ldap (2.2.6)     
-    shell: systemctl disable slapd  
+    shell: systemctl disable slapd 
+    tags: 
+      - section_2 
 
   - name: disabled nfs (2.2.7)     
     shell: systemctl disable nfs-server
+    tags: 
+      - section_2
 
   - name: disabled rpc (2.2.7)     
     shell: systemctl disable rpcbind
+    tags: 
+      - section_2
 
   - name: disabled dns server (2.2.8)     
     shell: systemctl disable bind9
+    tags: 
+      - section_2
 
   - name: disabled ftp server (2.2.9)     
     shell: systemctl disable vsftpd
+    tags: 
+      - section_2
 
   - name: disabled http server (2.2.10)     
     shell: systemctl disable apache2
+    tags: 
+      - section_2
 
   - name: remove exim4 (2.2.11)
     apt:
       name: exim4
       state: absent
       purge: yes
+    tags: 
+      - section_2  
 
   - name: disabled samba (2.2.12)     
     shell: systemctl disable smbd
+    tags: 
+      - section_2
 
   - name: disabled http proxy server (2.2.13)     
     shell: systemctl disable squid
+    tags: 
+      - section_2
 
   - name: disabled snmp server (2.2.14)     
-    shell: systemctl disable snmpd 
+    shell: systemctl disable snmpd
+    tags: 
+      - section_2
 
   - name: disabled rsync (2.2.16)     
-    shell: systemctl disable rsync 
+    shell: systemctl disable rsync
+    tags: 
+      - section_2 
 
   - name: disabled NIS (2.2.17)     
-    shell: systemctl disable nis  
+    shell: systemctl disable nis
+    tags: 
+      - section_2  
 
   - name: remove NIS client (2.3.1)
     apt:
       name: ypbind
-      state: absent 
+      state: absent
+    tags: 
+      - section_2   
 
   - name: remove rsh client (2.3.2)
     apt:
       name: rsh
-      state: absent 
+      state: absent
+    tags: 
+      - section_2   
 
   - name: remove talk client (2.3.3)
     apt:
       name: talk
-      state: absent   
+      state: absent
+    tags: 
+      - section_2     
 
   - name: remove telnet client (2.3.4)
     apt:
       name: telnet
       state: absent
+    tags: 
+      - section_2  
 
   - name: remove ldap client (2.3.5)
     apt:
       name: openldap-clients
       state: absent
+    tags: 
+      - section_2  
 
   - name: disabling ip forwarding (3.1.1)
     sysctl:
