@@ -597,4 +597,34 @@
   - name: change premissions for /etc/hosts.deny (3.3.5)
     shell: chmod 644 /etc/hosts.deny
     tags: 
-      - section_3        
+      - section_3 
+
+  - name: drop policy (prt.1) (3.5.1.1) 
+    shell: iptables -P INPUT DROP
+    tags:
+      - section_3
+
+  - name: drop policy (prt.2) (3.5.1.1) 
+    shell: iptables -P OUTPUT DROP
+    tags:
+      - section_3
+
+  - name: drop policy (prt.3) (3.5.1.1) 
+    shell: iptables -P FORWARD DROP
+    tags:
+      - section_3 
+
+  - name: loopback traffic configuration (prt.1) (3.5.1.2) 
+    shell: iptables -A INPUT -i lo -j ACCEPT
+    tags:
+      - section_3
+
+  - name: loopback traffic configuration (prt.2) (3.5.1.2) 
+    shell: iptables -A OUTPUT -o lo -j ACCEPT
+    tags:
+      - section_3
+
+  - name: loopback traffic configuration (prt.3) (3.5.1.2) 
+    shell: iptables -A INPUT -s 127.0.0.0/8 -j DROP
+    tags:
+      - section_3                           
