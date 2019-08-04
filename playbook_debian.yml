@@ -623,7 +623,21 @@
       - { name: net.ipv6.conf.all.disable_ipv6, value: 1 }
       - { name: net.ipv6.conf.default.disable_ipv6, value: 1 }
     tags: 
-      - section_3                                       
+      - section_3 
+
+  - name: install rsyslog (4.2.3)
+    apt:
+      name: rsyslog
+      state: present
+    tags: 
+      - section_4 
+
+  - name: install syslog-ng (4.2.3)
+    apt:
+      name: syslog-ng
+      state: present
+    tags: 
+      - section_4                                                   
 
   - name: enable rsyslog (4.2.1.1) 
     shell: systemctl enable rsyslog
@@ -643,3 +657,17 @@
     shell: update-rc.d syslog-ng enable
     tags:
       - section_4                 
+
+  - name: set parameter syslog-ng.conf (4.2.2.3)
+    lineinfile: 
+      dest: '/etc/syslog-ng/syslog-ng.conf'
+      regexp: ''
+      insertbefore: EOF
+      line: 'options { chain_hostnames(off); flush_lines(0); perm(0640); stats_freq(3600); threaded(yes); };'
+    tags: 
+      - section_4 
+
+  - name: set premissions on all logfiles (4.2.4) 
+    shell: chmod -R g-wx,o-rwx /var/log/*
+    tags:
+      - section_4            
