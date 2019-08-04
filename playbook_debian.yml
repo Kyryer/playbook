@@ -157,17 +157,7 @@
   - name: confin premitions bootloader prt.2 (1.4.1)
     shell: chmod og-rwx /boot/grub/grub.cfg 
     tags: 
-      - section_1    
-
-  - name: checking bootloader password (1.4.2)
-    shell: passwd -S 
-    tags: 
-      - section_1 
-
-  - name: checking root password (1.4.3)
-    shell: passwd root   
-    tags: 
-      - section_1  
+      - section_1     
 
   - name: added line in limits.conf (1.5.1)
     lineinfile: 
@@ -309,12 +299,7 @@
       name: xserver-xorg*
       state: absent
     tags: 
-      - section_2    
-  
-  - name: disabled avahi-daemon (2.2.3)     
-    shell: systemctl disable avahi-daemon
-    tags: 
-      - section_2                      
+      - section_2                        
 
   - name: disabled cups (2.2.4)     
     shell: systemctl disable cups
@@ -360,14 +345,6 @@
     shell: systemctl disable apache2
     tags: 
       - section_2
-
-  - name: remove exim4 (2.2.11)
-    apt:
-      name: exim4
-      state: absent
-      purge: yes
-    tags: 
-      - section_2  
 
   - name: disabled samba (2.2.12)     
     shell: systemctl disable smbd
@@ -632,4 +609,18 @@
   - name: configuration exist for all open ports (3.5.1.4) 
     shell: iptables -A INPUT -p <protocol> --dport <port> -m state --state NEW -j ACCEPT
     tags:
-      - section_3                               
+      - section_3  
+
+  - name: disable ip v6 (3.7)
+    sysctl:
+      name: '{{ item.name }}'
+      value: '{{ item.value }}'
+      sysctl_set: true
+      state: present
+      reload: true
+      ignoreerrors: true
+    with_items:
+      - { name: net.ipv6.conf.all.disable_ipv6, value: 1 }
+      - { name: net.ipv6.conf.default.disable_ipv6, value: 1 }
+    tags: 
+      - section_3                                       
