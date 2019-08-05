@@ -685,4 +685,15 @@
   - name: change premissions for /etc/crontab (5.1.2)
     shell: chmod og-rwx /etc/crontab
     tags: 
-      - section_5                         
+      - section_5
+
+  - name: change ownership for /etc/cron.hourly (5.1.3)
+    shell: chown root:root /etc/cron.hourly
+    tags: 
+      - section_5
+
+  - name: change premissions for /etc/cron.hourly (5.1.3)
+    shell: chmod og-rwx /etc/cron.hourly
+    tags: 
+      - section_5      
+
