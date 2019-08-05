@@ -670,4 +670,19 @@
   - name: set premissions on all logfiles (4.2.4) 
     shell: chmod -R g-wx,o-rwx /var/log/*
     tags:
-      - section_4            
+      - section_4
+
+  - name: enable cron (5.1.1) 
+    shell: systemctl enable cron
+    tags:
+      - section_5 
+
+  - name: change ownership for /etc/crontab (5.1.2)
+    shell: chown root:root /etc/crontab
+    tags: 
+      - section_5
+
+  - name: change premissions for /etc/crontab (5.1.2)
+    shell: chmod og-rwx /etc/crontab
+    tags: 
+      - section_5                         
