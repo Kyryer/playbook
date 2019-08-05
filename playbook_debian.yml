@@ -695,5 +695,24 @@
   - name: change premissions for /etc/cron.hourly (5.1.3)
     shell: chmod og-rwx /etc/cron.hourly
     tags: 
-      - section_5      
+      - section_5 
 
+  - name: change ownership for /etc/cron.daily (5.1.4)
+    shell: chown root:root /etc/cron.daily
+    tags: 
+      - section_5
+
+  - name: change premissions for /etc/cron.daily (5.1.4)
+    shell: chmod og-rwx /etc/cron.daily
+    tags: 
+      - section_5
+
+  - name: change ownership for /etc/cron.weekly (5.1.5)
+    shell: chown root:root /etc/cron.weekly
+    tags: 
+      - section_5
+
+  - name: change premissions for /etc/cron.weekly (5.1.5)
+    shell: chmod og-rwx /etc/cron.weekly
+    tags: 
+      - section_5      
