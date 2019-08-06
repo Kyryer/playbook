@@ -895,21 +895,21 @@
     tags: 
       - section_5
 
-  - name: setting SSH idle timeout interval (5.2.16)
-    block:
-      - name: Idle Timeout Interval
-        lineinfile:
-            state: present
-            dest: /etc/ssh/sshd_config
-            regexp: '^ClientAliveInterval'
-            line: "ClientAliveInterval 300"
+  - name: Idle Timeout Interval (5.2.16)
+    lineinfile:
+      state: present
+      dest: /etc/ssh/sshd_config
+      regexp: '^ClientAliveInterval'
+      line: "ClientAliveInterval 300"
+    tags: 
+      - section_5      
 
-      - name: ClientAliveCountMax
-        lineinfile:
-            state: present
-            dest: /etc/ssh/sshd_config
-            regexp: '^ClientAliveCountMax'
-            line: "ClientAliveCountMax 0" 
+  - name: ClientAliveCountMax (5.2.16)
+    lineinfile:
+      state: present
+      dest: /etc/ssh/sshd_config
+      regexp: '^ClientAliveCountMax'
+      line: "ClientAliveCountMax 0" 
     tags: 
       - section_5
 
@@ -931,26 +931,26 @@
     tags: 
       - section_5
 
-  - name: conf password creation requirements (5.3.1)
-    block:
-      - name: install lipam-pwquality
-        apt:
-            name: libpam-pwquality
-            state: present
-            install_recommends: false
+  - name: install lipam-pwquality (5.3.1)
+    apt:
+      name: libpam-pwquality
+      state: present
+      install_recommends: false
+    tags: 
+      - section_5  
 
-      - name: configurated password creation requirements
-        lineinfile:
-            state: present
-            dest: /etc/security/pwquality.conf
-            regexp: '^{{ item.key }}'
-            line: '{{ item.key }} = {{ item.value }}'
-        with_items:
-          - { key: minlen, value: 14 }
-          - { key: dcredit, value: -1 } 
-          - { key: ucredit, value: -1 }
-          - { key: ocredit, value: -1 }
-          - { key: lcredit, value: -1 }
+  - name: configurated password creation requirements (5.3.1)
+    lineinfile:
+      state: present
+      dest: /etc/security/pwquality.conf
+      regexp: '^{{ item.key }}'
+      line: '{{ item.key }} = {{ item.value }}'
+    with_items:
+      - { key: minlen, value: 14 }
+      - { key: dcredit, value: -1 } 
+      - { key: ucredit, value: -1 }
+      - { key: ocredit, value: -1 }
+      - { key: lcredit, value: -1 }
     tags: 
       - section_5      
 
