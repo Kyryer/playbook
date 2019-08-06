@@ -913,3 +913,98 @@
     tags: 
       - section_5
 
+  - name: setting SSH LoginGraceTime to 1 minute (5.2.17)
+    lineinfile:
+      state: present
+      dest: /etc/ssh/sshd_config
+      regexp: '^LoginGraceTime'
+      line: "LoginGraceTime 60" 
+    tags: 
+      - section_5
+      
+  - name: setting SSH warning banner (5.2.19)
+    ineinfile:
+      state: present
+      dest: /etc/ssh/sshd_config
+      regexp: '^Banner'
+      line: 'Banner /etc/issue.net'
+    tags: 
+      - section_5
+
+  - name: conf password creation requirements (5.3.1)
+    block:
+      - name: install lipam-pwquality
+        apt:
+            name: libpam-pwquality
+            state: present
+            install_recommends: false
+
+      - name: configurated password creation requirements
+        lineinfile:
+            state: present
+            dest: /etc/security/pwquality.conf
+            regexp: '^{{ item.key }}'
+            line: '{{ item.key }} = {{ item.value }}'
+        with_items:
+          - { key: minlen, value: 14 }
+          - { key: dcredit, value: -1 } 
+          - { key: ucredit, value: -1 }
+          - { key: ocredit, value: -1 }
+          - { key: lcredit, value: -1 }
+    tags: 
+      - section_5      
+
+  - name: configure lockout for failed password attempts (5.3.2)
+    lineinfile: 
+      dest: /etc/pam.d/common-auth
+      regexp: ''
+      insertafter: EOF
+      line: 'auth required pam_tally2.so onerr=fail audit silent deny=5 unlock_time=900'
+    tags: 
+      - section_5
+      
+  - name: configure limit password reuse (5.3.3)
+    lineinfile: 
+      dest: /etc/pam.d/common-password
+      regexp: ''
+      insertafter: EOF
+      line: 'password required pam_pwhistory.so remember=5'
+    tags: 
+      - section_5            
+                 
+  - name: configure password algorithm (5.3.4)
+    lineinfile: 
+      dest: /etc/pam.d/common-password
+      regexp: ''
+      insertafter: EOF
+      line: 'password [success=1 default=ignore] pam_unix.so sha512'
+    tags: 
+      - section_5 
+
+  - name: set password expiration is 90 days (5.4.1.1)
+    lineinfile:
+      state: present
+      dest: /etc/login.defs
+      regexp: '^PASS_MAX_DAYS'
+      line: 'PASS_MAX_DAYS 90'
+    tags: 
+      - section_5 
+      
+  - name: setting minimum days between password changes to 7 (5.4.1.2)
+    lineinfile:
+      state: present
+      dest: /etc/login.defs
+      regexp: '^PASS_MIN_DAYS'
+      line: 'PASS_MIN_DAYS 7'
+    tags: 
+      - section_5
+
+  - name: setting the password expiration warning period to 7 (5.4.1.3)
+    lineinfile:
+      state: present
+      dest: /etc/login.defs
+      regexp: '^PASS_WARN_AGE'
+      line: 'PASS_WARN_AGE 7'
+    tags: 
+      - section_5                                                      
+
