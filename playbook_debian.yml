@@ -922,14 +922,14 @@
     tags: 
       - section_5
       
-  - name: setting SSH warning banner (5.2.19)
-    ineinfile:
-      state: present
-      dest: /etc/ssh/sshd_config
-      regexp: '^Banner'
-      line: 'Banner /etc/issue.net'
-    tags: 
-      - section_5
+#  - name: setting SSH warning banner (5.2.19)
+#    ineinfile:
+#      state: present
+#      dest: /etc/ssh/sshd_config
+#      regexp: '^Banner'
+#      line: 'Banner /etc/issue.net'
+#    tags: 
+#      - section_5
 
   - name: install lipam-pwquality (5.3.1)
     apt:
