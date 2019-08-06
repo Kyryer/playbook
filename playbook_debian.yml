@@ -199,17 +199,18 @@
     tags: 
       - section_1
 
-  - name: restore binaries (1.5.4)
-    shell: prelink -ua
-    tags: 
-      - section_1
+  #- name: restore binaries (1.5.4)
+  #  shell: prelink -ua
+  #  tags: 
+  #    - section_1
 
-  - name: remove prelink (1.5.4)
-    apt:
-      name: prelink
-      state: absent
-    tags: 
-      - section_1  
+  #- name: remove prelink (1.5.4)
+  #  apt:
+  #    name: prelink
+  #    state: absent
+  #  tags: 
+  #    - section_1 
+  # prelink не установлен 
 
   - name: checking /etc/motd file (1.7.1.1)
     shell: cat /etc/motd
