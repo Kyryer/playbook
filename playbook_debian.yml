@@ -812,4 +812,58 @@
       regexp: '^X11Forwarding'
       line: 'X11Forwarding no' 
     tags: 
-      - section_5                                                                                     
+      - section_5 
+
+  - name: setting SSH MaxAuthTries to 4 (5.2.7)
+    lineinfile:
+      state: present
+      dest: /etc/ssh/sshd_config
+      regexp: '^(#)?MaxAuthTries \d'
+      line: 'MaxAuthTries 4'
+    tags: 
+      - section_5
+
+  - name: enabled SSH IgnoreRhosts (5.2.8)
+    lineinfile:
+      state: present
+      dest: /etc/ssh/sshd_config
+      regexp: '^IgnoreRhosts'
+      line: 'IgnoreRhosts yes'
+    tags: 
+      - section_5 
+
+  - name: disabling SSH HostbasedAuthentication (5.2.9)
+    lineinfile:
+      state: present
+      dest: /etc/ssh/sshd_config
+      regexp: '^HostbasedAuthentication'
+      line: 'HostbasedAuthentication no'
+    tags: 
+      - section_5
+
+  - name: disabling SSH root login (5.2.10)
+    lineinfile:
+      state: present
+      dest: /etc/ssh/sshd_config
+      regexp: '^PermitRootLogin'
+      line: 'PermitRootLogin no'                                                                                                         
+    tags: 
+      - section_5
+
+  - name: disabling SSH PermitEmptyPasswords (5.2.11)
+    lineinfile:
+      state: present
+      dest: /etc/ssh/sshd_config
+      regexp: '^PermitEmptyPasswords'
+      line: 'PermitEmptyPasswords no'
+    tags: 
+      - section_5
+      
+  - name: disabling SSH PermitUserEnvironment (5.2.12)
+    lineinfile:
+      state: present
+      dest: /etc/ssh/sshd_config
+      regexp: '^PermitUserEnvironment'
+      line: 'PermitUserEnvironment no' 
+    tags: 
+      - section_5   
