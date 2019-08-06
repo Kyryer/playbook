@@ -13,10 +13,11 @@
     tags: 
       - section_1  
 
-  - name: Ensure mounting of unneeded filesystems (1.1.1.1-1.1.1.5)
-    command: rmmod unneededfilesystem
-    tags: 
-      - section_1
+#  - name: Ensure mounting of unneeded filesystems (1.1.1.1-1.1.1.5)
+#    command: rmmod unneededfilesystem
+#    tags: 
+#      - section_1
+#ошибка: module *name module* is not currently loaded - надо перезагрузить?
 
   - name: Remove freevxfs module (1.1.1.1)
     modprobe: 
@@ -67,10 +68,11 @@
     tags: 
       - section_1  
 
-  - name: Ensure separate partition exist for /var/tmp (1.1.7)
-    shell: mount | grep /var/tmp  
-    tags: 
-      - section_1
+ # - name: Ensure separate partition exist for /var/tmp (1.1.7)
+ #   shell: mount | grep /var/tmp  
+ #   tags: 
+ #     - section_1
+ #ошибка: consider using mount module rather than running mount
       
   - name: nodev,nosuid,noexec option for /var/tmp (1.1.8-1.1.10)
     lineinfile:
