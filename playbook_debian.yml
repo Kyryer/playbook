@@ -1052,7 +1052,7 @@
       - section_6  
 
   - name: change ownership for /etc/shadow (6.1.3)
-    shell: chown root:root /etc/shadow
+    shell: chown root:shadow /etc/shadow
     tags: 
       - section_6
 
@@ -1084,6 +1084,35 @@
   - name: change ownership for /etc/passwd- (6.1.6)
     shell: chown root:root /etc/passwd-
     tags: 
-      - section_6                                   
+      - section_6 
 
+  - name: change premissions for /etc/shadow- (6.1.7)
+    shell: chmod o-rwx,g-rw /etc/shadow-
+    tags: 
+      - section_6  
+
+  - name: change ownership for /etc/shadow- (6.1.7)
+    shell: chown root:shadow /etc/shadow-
+    tags: 
+      - section_6 
+
+  - name: change premissions for /etc/group- (6.1.8)
+    shell: chmod u-x,go-wx /etc/group-
+    tags: 
+      - section_6  
+
+  - name: change ownership for /etc/group- (6.1.8)
+    shell: chown root:root /etc/group-
+    tags: 
+      - section_6 
+
+  - name: change premissions for /etc/gshadow- (6.1.9)
+    shell: chmod o-rwx,g-rw /etc/gshadow-
+    tags: 
+      - section_6  
+
+  - name: change ownership for /etc/gshadow- (6.1.9)
+    shell: chown root:shadow /etc/gshadow-
+    tags: 
+      - section_6 
 
