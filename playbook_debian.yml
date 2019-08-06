@@ -83,20 +83,21 @@
     tags: 
       - section_1  
  
-  - name: Ensure separate partition exist for /var/log (1.1.11)
-    shell: mount | grep /var/log 
-    tags: 
-      - section_1
+ # - name: Ensure separate partition exist for /var/log (1.1.11)
+ #   shell: mount | grep /var/log 
+ #   tags: 
+ #     - section_1
+ #ошибка: consider using mount module rather than running mount     
 
-  - name: Ensure separate partition exist for /var/log/audit (1.1.12)
-    shell: mount | grep /var/log/audit  
-    tags: 
-      - section_1
+ # - name: Ensure separate partition exist for /var/log/audit (1.1.12)
+ #   shell: mount | grep /var/log/audit  
+ #   tags: 
+ #     - section_1
 
-  - name: Ensure separate partition exist for /home (1.1.13)
-    shell: mount | grep /home 
-    tags: 
-      - section_1     
+ # - name: Ensure separate partition exist for /home (1.1.13)
+ #   shell: mount | grep /home 
+ #   tags: 
+ #     - section_1     
 
   - name: nodev option for /home (1.1.14)
     lineinfile:
@@ -176,7 +177,7 @@
       regexp: ''
       insertbefore: EOF
       line: 'fs.suid_dumpable = 0'  
-      tags: 
+    tags: 
       - section_1   
 
   - name: run command to the activate kernel parameter (1.5.1)
