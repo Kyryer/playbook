@@ -775,4 +775,14 @@
   - name: change ownership for /etc/at.allow (5.1.8)
     shell: chown root:root /etc/at.allow
     tags: 
-      - section_5                                                            
+      - section_5 
+      
+  - name: change ownership for /etc/ssh/sshd_config (5.2.1)
+    shell: chown root:root /etc/ssh/sshd_config
+    tags: 
+      - section_5
+
+  - name: change premissions for /etc/ssh/sshd_config (5.2.1)
+    shell: chmod og-rwx /etc/ssh/sshd_config
+    tags: 
+      - section_5                                                                       
