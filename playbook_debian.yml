@@ -1034,6 +1034,56 @@
       insertafter: EOF
       line: 'auth required pam_wheel.so'
     tags: 
-      - section_5             
+      - section_5  
+
+  - name: change premissions for /etc/passwd (6.1.2)
+    shell: chmod 644 /etc/passwd
+    tags: 
+      - section_6  
+
+  - name: change ownership for /etc/passwd (6.1.2)
+    shell: chown root:root /etc/passwd
+    tags: 
+      - section_6 
+
+  - name: change premissions for /etc/shadow (6.1.3)
+    shell: chmod o-rwx,g-wx /etc/shadow
+    tags: 
+      - section_6  
+
+  - name: change ownership for /etc/shadow (6.1.3)
+    shell: chown root:root /etc/shadow
+    tags: 
+      - section_6
+
+  - name: change premissions for /etc/group (6.1.4)
+    shell: chmod 644 /etc/group
+    tags: 
+      - section_6  
+
+  - name: change ownership for /etc/group (6.1.4)
+    shell: chown root:root /etc/group
+    tags: 
+      - section_6      
+
+  - name: change premissions for /etc/gshadow (6.1.5)
+    shell: chmod o-rwx,g-rw /etc/gshadow
+    tags: 
+      - section_6  
+
+  - name: change ownership for /etc/gshadow (6.1.5)
+    shell: chown root:shadow /etc/gshadow
+    tags: 
+      - section_6 
+
+  - name: change premissions for /etc/passwd- (6.1.6)
+    shell: chmod u-x,go-wx /etc/passwd-
+    tags: 
+      - section_6  
+
+  - name: change ownership for /etc/passwd- (6.1.6)
+    shell: chown root:root /etc/passwd-
+    tags: 
+      - section_6                                   
 
 
