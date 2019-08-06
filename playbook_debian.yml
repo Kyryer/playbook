@@ -1006,5 +1006,34 @@
       regexp: '^PASS_WARN_AGE'
       line: 'PASS_WARN_AGE 7'
     tags: 
-      - section_5                                                      
+      - section_5 
+
+  - name: Ensure system accounts are non-login (5.4.2)
+    command: >
+      for user in `awk -F: '($3 < 1000) {print $1 }' /etc/passwd`; do
+       if [ $user != "root" ]; then
+        usermod -L $user
+        if [ $user != "sync" ] && [ $user != "shutdown" ] && [ $user != "halt" ];
+      then
+          usermod -s /usr/sbin/nologin $user
+        fi
+       fi
+      done
+    tags: 
+      - section_5
+
+  - name: set default group for the root account to GID 0 (5.4.3)
+    shell: usermod -g 0 root
+    tags: 
+      - section_5 
+
+  - name: configure su command (5.3.3)
+    lineinfile: 
+      dest: /etc/pam.d/su
+      regexp: ''
+      insertafter: EOF
+      line: 'auth required pam_wheel.so'
+    tags: 
+      - section_5             
+
 
