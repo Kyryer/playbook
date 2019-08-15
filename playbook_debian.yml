@@ -307,71 +307,85 @@
 
   - name: disabled cups (2.2.4)     
     shell: systemctl disable cups
+    ignore_errors: yes
     tags: 
       - section_2
 
   - name: disabled DHCP (2.2.5)     
     shell: systemctl disable isc-dhcp-server
+    ignore_errors: yes
     tags: 
       - section_2
 
   - name: disabled DHCP (v6) (2.2.5)     
     shell: systemctl disable isc-dhcp-server6
+    ignore_errors: yes
     tags: 
       - section_2        
 
   - name: disabled ldap (2.2.6)     
-    shell: systemctl disable slapd 
+    shell: systemctl disable slapd
+    ignore_errors: yes 
     tags: 
       - section_2 
 
   - name: disabled nfs (2.2.7)     
     shell: systemctl disable nfs-server
+    ignore_errors: yes
     tags: 
       - section_2
 
   - name: disabled rpc (2.2.7)     
     shell: systemctl disable rpcbind
+    ignore_errors: yes
     tags: 
       - section_2
 
   - name: disabled dns server (2.2.8)     
     shell: systemctl disable bind9
+    ignore_errors: yes
     tags: 
       - section_2
 
   - name: disabled ftp server (2.2.9)     
     shell: systemctl disable vsftpd
+    ignore_errors: yes
     tags: 
       - section_2
 
   - name: disabled http server (2.2.10)     
     shell: systemctl disable apache2
+    ignore_errors: yes
     tags: 
       - section_2
 
   - name: disabled samba (2.2.12)     
     shell: systemctl disable smbd
+    ignore_errors: yes
     tags: 
       - section_2
 
   - name: disabled http proxy server (2.2.13)     
     shell: systemctl disable squid
+    ignore_errors: yes
     tags: 
       - section_2
 
   - name: disabled snmp server (2.2.14)     
     shell: systemctl disable snmpd
+    ignore_errors: yes
     tags: 
       - section_2
 
   - name: disabled rsync (2.2.16)     
     shell: systemctl disable rsync
+    ignore_errors: yes
     tags: 
       - section_2 
 
   - name: disabled NIS (2.2.17)     
     shell: systemctl disable nis
+    ignore_errors: yes
     tags: 
       - section_2  
 
