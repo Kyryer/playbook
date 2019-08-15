@@ -762,11 +762,13 @@
 
   - name: remove /etc/cron.deny (5.1.8)
     shell: rm /etc/cron.deny
+    ignore_errors: yes
     tags: 
       - section_5
 
   - name: remove /etc/at.deny (5.1.8)
     shell: rm /etc/at.deny
+    ignore_errors: yes
     tags: 
       - section_5  
       
