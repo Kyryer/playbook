@@ -626,7 +626,6 @@
 
   - name: configuration exist for all open ports (3.5.1.4) 
     shell: iptables -A INPUT -p tcp --dport 22 -m state --state NEW -j ACCEPT
-    ignore_errors: yes
     tags:
       - section_3  
 
@@ -656,7 +655,12 @@
       name: syslog-ng
       state: present
     tags: 
-      - section_4                                                   
+      - section_4 
+
+  - name: unmask rsyslog (4.2.1.1) 
+    shell: systemctl unmask rsyslog.service
+    tags:
+      - section_4                                                              
 
   - name: enable rsyslog (4.2.1.1) 
     shell: systemctl enable rsyslog
