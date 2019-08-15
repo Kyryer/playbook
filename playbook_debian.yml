@@ -1044,6 +1044,7 @@
         fi
        fi
       done
+    ignore_errors: yes
     tags: 
       - section_5
 
