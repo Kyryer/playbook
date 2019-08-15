@@ -625,7 +625,8 @@
       - section_3
 
   - name: configuration exist for all open ports (3.5.1.4) 
-    shell: iptables -A INPUT -p <protocol> --dport <port> -m state --state NEW -j ACCEPT
+    shell: iptables -A INPUT -p tcp --dport 22 -m state --state NEW -j ACCEPT
+    ignore_errors: yes
     tags:
       - section_3  
 
