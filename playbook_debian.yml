@@ -185,19 +185,19 @@
     tags: 
       - section_1
 
-  - name: set parameter in sysctl.conf (1.5.2)
-    lineinfile: 
-      dest: '/etc/sysctl.conf'
-      regexp: ''
-      insertbefore: EOF
-      line: 'kernel.randomize_va_space = 2' 
-    tags: 
-      - section_1      
+  #- name: set parameter in sysctl.conf (1.5.2)
+  #  lineinfile: 
+  #    dest: '/etc/sysctl.conf'
+  #    regexp: ''
+  #    insertbefore: EOF
+  #    line: 'kernel.randomize_va_space = 2' 
+  #  tags: 
+  #    - section_1      
 
-  - name: run command to the activate kernel parameter (1.5.2)
-    shell: sysctl -w kernel.randomize_va_space=2
-    tags: 
-      - section_1
+  #- name: run command to the activate kernel parameter (1.5.2)
+  #  shell: sysctl -w kernel.randomize_va_space=2
+  #  tags: 
+  #    - section_1
 
   #- name: restore binaries (1.5.4)
   #  shell: prelink -ua
