@@ -185,7 +185,7 @@
     tags: 
       - section_1
 
-  #- name: set parameter in sysctl.conf (1.5.2)
+  #- name: set parameter in sysctl.conf (1.5.3)
   #  lineinfile: 
   #    dest: '/etc/sysctl.conf'
   #    regexp: ''
@@ -194,7 +194,7 @@
   #  tags: 
   #    - section_1      
 
-  #- name: run command to the activate kernel parameter (1.5.2)
+  #- name: run command to the activate kernel parameter (1.5.3)
   #  shell: sysctl -w kernel.randomize_va_space=2
   #  tags: 
   #    - section_1
@@ -1034,16 +1034,7 @@
       - section_5 
 
   - name: Ensure system accounts are non-login (5.4.2)
-    command: >
-      for user in `awk -F: '($3 < 1000) {print $1 }' /etc/passwd`; do
-       if [ $user != "root" ]; then
-        usermod -L $user
-        if [ $user != "sync" ] && [ $user != "shutdown" ] && [ $user != "halt" ];
-      then
-          usermod -s /usr/sbin/nologin $user
-        fi
-       fi
-      done
+    script: /etc/ansible/5.4.2/sh
     ignore_errors: yes
     tags: 
       - section_5
