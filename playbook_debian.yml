@@ -223,6 +223,7 @@
       regexp: '*Debian*'
       insertbefore: BOF
       line: 'Authorized uses only. All activity may be monitored and reported.'
+    ignore_errors: yes 
     tags: 
       - section_1  
 
@@ -232,8 +233,10 @@
       regexp: '*Debian*'
       insertbefore: BOF
       line: 'Authorized uses only. All activity may be monitored and reported.'
+    ignore_errors: yes  
     tags: 
       - section_1  
+    
 
   - name: change ownership for /etc/motd (1.7.1.4)
     shell: chown root:root /etc/motd
