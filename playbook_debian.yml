@@ -275,6 +275,7 @@
       regexp: 'banner-message'
       insertbefore: BOF
       line: 'banner-message-enable=true'
+    ignore_errors: yes  
     tags: 
       - section_1  
 
