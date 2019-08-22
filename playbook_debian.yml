@@ -54,10 +54,10 @@
     tags: 
       - section_1  
   
-  - name: Ensure /tmp is configurated (1.1.2, 1.1.6)
-    shell: mount | grep /tmp
-    tags: 
-      - section_1
+  #- name: Ensure /tmp is configurated (1.1.2, 1.1.6)
+  #  shell: mount | grep /tmp
+  #  tags: 
+  #    - section_1
 
   - name: nodev,nosuid,noexec option for /tmp (1.1.3-1.1.5)
     lineinfile:
@@ -283,6 +283,7 @@
       regexp: ''
       insertbefore: EOF
       line: 'Authorized uses only. All activity may be monitored and reported.'
+    ignore_errors: yes  
     tags: 
       - section_1  
 
